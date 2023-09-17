@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const database_name = "TODO";
+const database_name = "cineShareDB";
 
 mongoose.connect('mongodb://127.0.0.1:27017/' + database_name, {
     useNewUrlParser: true,
