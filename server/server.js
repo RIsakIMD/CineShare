@@ -26,4 +26,7 @@ app.use(cors(corsOptions));
 const UserRoutes = require('./routes/user.routes');
 UserRoutes(app);
 
+const MovieRoutes = require('./routes/movie.routes');
+MovieRoutes(app);
+
 app.listen(port, () => console.log(`Listening on port: ${port}`) );
