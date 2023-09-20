@@ -74,40 +74,37 @@ const MovieForm = (props) => {
         e.preventDefault();
 
         if (validateInputs()) {
-            const formData = new FormData();
-            formData.append("image", image);
-            formData.append("title", title);
-            formData.append("releaseDate", releaseDate);
-            formData.append("watchedDate", watchedDate);
-            formData.append("location", location);
-            formData.append("favoriteQuote", favoriteQuote);
-            formData.append("opinion", opinion);
-
-            try {
-                const response = await axios.post(
-                    "http://localhost:8000/api/movies/",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
-
-                console.log(response.data);
-                setMovies([...movies, response.data]);
-                
-                setImage(null);
-                setTitle("");
-                setReleaseDate("");
-                setWatchedDate("");
-                setLocation("");
-                setFavoriteQuote("");
-                setOpinion("");
-                navigate("/dashboard");
-            } catch (error) {
-                console.error(error);
-            }
+            const reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onloadend = async () => {
+                try {
+                    const base64Image = reader.result.split(',')[1];
+                    const response = await axios.post(
+                        "http://localhost:8000/api/movies/",
+                        {
+                            image: base64Image,
+                            title,
+                            releaseDate,
+                            watchedDate,
+                            location,
+                            favoriteQuote,
+                            opinion
+                        }
+                    );
+                    console.log(response.data);
+                    setMovies([...movies, response.data]);
+                    setImage(null);
+                    setTitle("");
+                    setReleaseDate("");
+                    setWatchedDate("");
+                    setLocation("");
+                    setFavoriteQuote("");
+                    setOpinion("");
+                    navigate("/dashboard");
+                } catch (error) {
+                    console.error(error);
+                }
+            };
         }
     };
 
@@ -161,7 +158,7 @@ const MovieForm = (props) => {
                                     {errors.releaseDate && <div className="invalid-feedback">{errors.releaseDate}</div>}
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="watchedDate" className="form-label">When did you watch this?</label>
+                                    <label htmlFor="watchedDate" className="form-label">Watched Date:</label>
                                     <input
                                         onChange={(e) => setWatchedDate(e.target.value)}
                                         value={watchedDate}
@@ -172,7 +169,7 @@ const MovieForm = (props) => {
                                     {errors.watchedDate && <div className="invalid-feedback">{errors.watchedDate}</div>}
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="location" className="form-label">Where did you watch this?</label>
+                                    <label htmlFor="location" className="form-label">Location Watched:</label>
                                     <input
                                         onChange={(e) => setLocation(e.target.value)}
                                         value={location}
@@ -183,8 +180,8 @@ const MovieForm = (props) => {
                                     {errors.location && <div className="invalid-feedback">{errors.location}</div>}
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="favoriteQuote" className="form-label">Favorite quote (if any):</label>
-                                    <input
+                                    <label htmlFor="favoriteQuote" className="form-label">Favorite Quote:</label>
+                                    <textarea
                                         onChange={(e) => setFavoriteQuote(e.target.value)}
                                         value={favoriteQuote}
                                         name="favoriteQuote"
@@ -193,16 +190,18 @@ const MovieForm = (props) => {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="opinion" className="form-label">Your opinion:</label>
+                                    <label htmlFor="opinion" className="form-label">Your Opinion:</label>
                                     <textarea
                                         onChange={(e) => setOpinion(e.target.value)}
                                         value={opinion}
                                         name="opinion"
+                                        type="text"
                                         className="form-control"
-                                        rows="3"
-                                    ></textarea>
+                                    />
                                 </div>
-                                <button type="submit" className="btn btn-warning btn-block">Submit</button>
+                                <div className="text-center">
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </div>
                             </form>
                         </div>
                     </div>
