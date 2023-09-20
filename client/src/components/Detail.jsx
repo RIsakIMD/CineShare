@@ -12,7 +12,6 @@ const Detail = (props) => {
         axios.get('http://localhost:8000/api/movies/' + id)
             .then((res) => {
                 setMovie(res.data);
-                console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -22,7 +21,6 @@ const Detail = (props) => {
     const deleteHandle = () => {
         axios.delete('http://localhost:8000/api/movies/' + id)
             .then((res) => {
-                console.log(res.data);
                 navigate("/dashboard");
             })
             .catch((err) => {
@@ -40,7 +38,7 @@ const Detail = (props) => {
             {movie.image && (
                 <div className="mb-3">
                     <h3>Image:</h3>
-                    <img src={`http://localhost:8000/uploads/${movie.image}`} alt={movie.title} style={{ width: '100%' }} />
+                    <img src={movie.image} alt={movie.title} style={{ width: '25%' }} />
                 </div>
             )}
             <div className='details mt-4 mx-auto p-3 border border-dark' style={{ width: '80%', maxWidth: '600px' }}>

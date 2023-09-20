@@ -10,7 +10,6 @@ const MovieList = (props) => {
         axios
             .get("http://localhost:8000/api/movies")
             .then((res) => {
-                console.log(res.data);
                 setMovies(res.data);
             })
             .catch((err) => {
@@ -36,10 +35,10 @@ const MovieList = (props) => {
                         <tr key={movie._id}>
                             <td>
                                 <Link to={`/movies/${movie._id}`}>
-                                    <img 
-                                        src={movie.imageURL} 
-                                        alt={movie.title} 
-                                        style={{ width: '50px', height: '50px' }} 
+                                    <img
+                                        src={movie.image}
+                                        alt={movie.title}
+                                        style={{ width: '50px', height: '50px' }}
                                     />
                                 </Link>
                             </td>

@@ -25,8 +25,7 @@ const MovieSchema = new mongoose.Schema({
         type: String
     },
     image: {
-        data: Buffer,
-        contentType: String
+        type: String // Base64 String
     }
 }, {timestamps: true});
 

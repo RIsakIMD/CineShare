@@ -20,8 +20,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// TODO: Add call to Routes here
-
 //* Import and set up routes for User-related endpoints
 const UserRoutes = require('./routes/user.routes');
 UserRoutes(app);

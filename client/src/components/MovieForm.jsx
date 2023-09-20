@@ -78,7 +78,7 @@ const MovieForm = (props) => {
             reader.readAsDataURL(image);
             reader.onloadend = async () => {
                 try {
-                    const base64Image = reader.result.split(',')[1];
+                    const base64Image = reader.result;
                     const response = await axios.post(
                         "http://localhost:8000/api/movies/",
                         {

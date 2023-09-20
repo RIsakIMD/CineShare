@@ -2,7 +2,6 @@
 const Movie = require('../models/movie.model');
 
 module.exports.create = (request, response) => {
-    console.log(request.body);
     Movie.create(request.body)
         .then(newMovie => {response.json(newMovie);})
         .catch((err) => {response.json(err)});
