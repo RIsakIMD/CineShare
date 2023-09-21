@@ -3,6 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
+const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
 const MovieList = (props) => {
     const { movies, setMovies } = props;
 
@@ -42,8 +47,8 @@ const MovieList = (props) => {
                                 </Link>
                             </td>
                             <td><Link to={`/movies/${movie._id}`}>{movie.title}</Link></td>
-                            <td>{movie.releaseDate}</td>
-                            <td>{movie.watchedDate}</td>
+                            <td>{formatDate(movie.releaseDate)}</td>
+                            <td>{formatDate(movie.watchedDate)}</td>
                             <td>{movie.location}</td>
                             <td>
                                 <Link className="btn btn-warning" to={`/movies/edit/${movie._id}`}>Edit</Link>

@@ -3,6 +3,11 @@ import axios from 'axios';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 
+const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
 const Detail = (props) => {
     const [movie, setMovie] = useState({});
     const { id } = useParams();
@@ -48,11 +53,11 @@ const Detail = (props) => {
                 </div>
                 <div className="mb-3">
                     <h3>Release Date:</h3>
-                    <div className="border border-warning p-2">{movie.releaseDate}</div>
+                    <div className="border border-warning p-2">{formatDate(movie.releaseDate)}</div>
                 </div>
                 <div className="mb-3">
                     <h3>Date Watched:</h3>
-                    <div className="border border-warning p-2">{movie.watchedDate}</div>
+                    <div className="border border-warning p-2">{formatDate(movie.watchedDate)}</div>
                 </div>
                 <div className="mb-3">
                     <h3>Where did you watch this?:</h3>
