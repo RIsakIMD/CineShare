@@ -48,7 +48,7 @@ const Dash = ({ errors, setErrors }) => {
                 </div>
                 <div className="d-flex">
                     <Link to={"/movies/new"} className="btn btn-warning me-3">Share a movie</Link>
-                    <button onClick={logoutHandle} className="btn btn-dark">Logout</button>
+                    <button onClick={logoutHandle} className="btn btn-primary">Logout</button>
                 </div>
             </div>
             <h2 className="text-primary mb-3">Movies</h2>

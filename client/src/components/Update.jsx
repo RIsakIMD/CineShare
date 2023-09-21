@@ -61,8 +61,8 @@ const Update = () => {
 
     return (
         <div className="container mt-5">
-            <div className="card">
-                <h1 className="card-header text-primary">Edit {title}</h1>
+            <div className="card mx-auto" style={{ maxWidth: '600px' }}>
+                <h1 className="card-header text-warning">Edit {title}</h1>
                 <div className="card-body">
                     <form onSubmit={updateMovie} encType="multipart/form-data">
                         <div className="mb-3">
@@ -80,7 +80,6 @@ const Update = () => {
                                 <img src={imageFile ? URL.createObjectURL(imageFile) : image} alt="Movie Poster Image" className="img-fluid" />
                             </div>
                         )}
-
                         <div className="mb-3">
                             <label htmlFor="title" className="form-label">Title:</label>
                             <input
@@ -90,7 +89,6 @@ const Update = () => {
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
-
                         <div className="mb-3">
                             <label htmlFor="releaseDate" className="form-label">Release Date:</label>
                             <input
@@ -100,7 +98,6 @@ const Update = () => {
                                 onChange={(e) => setReleaseDate(e.target.value)}
                             />
                         </div>
-
                         <div className="mb-3">
                             <label htmlFor="watchedDate" className="form-label">Watched Date:</label>
                             <input
@@ -110,7 +107,6 @@ const Update = () => {
                                 onChange={(e) => setWatchedDate(e.target.value)}
                             />
                         </div>
-
                         <div className="mb-3">
                             <label htmlFor="location" className="form-label">Location Watched:</label>
                             <input
@@ -120,7 +116,6 @@ const Update = () => {
                                 onChange={(e) => setLocation(e.target.value)}
                             />
                         </div>
-
                         <div className="mb-3">
                             <label htmlFor="favoriteQuote" className="form-label">Favorite Quote:</label>
                             <textarea
@@ -130,7 +125,6 @@ const Update = () => {
                                 onChange={(e) => setFavoriteQuote(e.target.value)}
                             />
                         </div>
-
                         <div className="mb-3">
                             <label htmlFor="opinion" className="form-label">Your Opinion:</label>
                             <textarea
@@ -140,7 +134,6 @@ const Update = () => {
                                 onChange={(e) => setOpinion(e.target.value)}
                             />
                         </div>
-
                         <button type="submit" className="btn btn-warning">Update Movie</button>
                     </form>
                 </div>
@@ -150,5 +143,3 @@ const Update = () => {
 };
 
 export default Update;
-
-

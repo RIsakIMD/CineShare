@@ -22,6 +22,7 @@ const LoginForm = ({ errors, setErrors }) => {
     }
 
     return (
+        <div className="p-3 rounded">
         <form onSubmit={formHandle}>
             <h3 className="bg-primary text-white p-2 rounded">Login</h3>
             <div className="mb-3">
@@ -34,6 +35,7 @@ const LoginForm = ({ errors, setErrors }) => {
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
         </form>
+        </div>
     )
 }
 
