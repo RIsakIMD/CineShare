@@ -27,7 +27,6 @@ const MovieList = (props) => {
                         <th>Release Date</th>
                         <th>Date Watched</th>
                         <th>Location</th>
-                        <th>Shared by</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +45,6 @@ const MovieList = (props) => {
                             <td>{movie.releaseDate}</td>
                             <td>{movie.watchedDate}</td>
                             <td>{movie.location}</td>
-                            <td>{movie.user}</td>
                             <td>
                                 <Link className="btn btn-warning" to={`/movies/edit/${movie._id}`}>Edit</Link>
                             </td>

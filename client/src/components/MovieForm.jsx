@@ -114,7 +114,7 @@ const MovieForm = (props) => {
                 <div className="col-md-6">
                     <h1 className="text-center text-primary display-3">Cine-Share</h1>
                     <h2 className="text-center text-primary mb-3">Tell us what you watched!</h2>
-                    <Link to={"/dashboard"} className="d-block text-center text-primary mb-3">Back to Dashboard</Link>
+                    <Link to={"/dashboard"} className="btn btn-warning mb-3">Back to Dashboard</Link>
 
                     <div className="card mt-4 border-primary">
                         <div className="card-body">
@@ -199,8 +199,8 @@ const MovieForm = (props) => {
                                         className="form-control"
                                     />
                                 </div>
-                                <div className="text-center">
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                <div className="text-right mt-3">
+                                    <button type="submit" className="btn btn-warning">Submit</button>
                                 </div>
                             </form>
                         </div>
