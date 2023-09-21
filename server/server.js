@@ -1,8 +1,8 @@
-
 const express = require('express');
 const app = express();
 const port = 8000;
 const cors = require("cors");
+const cookieParser = require('cookie-parser');  // Import the cookie-parser
 
 require("./config/mongoose.config");
 
@@ -10,6 +10,9 @@ require("./config/mongoose.config");
 require('dotenv').config();
 
 app.use(express.json(), express.urlencoded({ extended: true }));
+
+//* Use cookie-parser middleware
+app.use(cookieParser());
 
 //* Configure CORS options to allow specific origins, HTTP methods, credentials, and response status
 const corsOptions = {

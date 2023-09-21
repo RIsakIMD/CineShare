@@ -6,18 +6,18 @@ const bcrypt = require('bcrypt');
 
 //! Exported object with functions to handle user registration, login, and logout
 module.exports = {
-    //! Functioin to handle user registration
+    //! Function to handle user registration
     registerUser: async (req, res) => {
         try {
             console.log('Request Body', req.body)
             const user = await User.findOne({email: req.body.email})
-            if ( user ) {
+            if (user) {
                 res.status(400).json({message: 'That email already exists'})
             } else {
                 const newUser = await User.create(req.body);
                 const userToken = jwt.sign({ _id: newUser._id, email: newUser.email }, secret, { expiresIn: '2h' })
-                console.log( userToken )
-                res.status(201).cookie( 'userToken', userToken, { httpOnly: true, maxAge:2*60*60*1000 }).json(newUser);
+                console.log(userToken)
+                res.status(201).cookie('userToken', userToken, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 }).json(newUser);
             }
         }
         catch(err) {
@@ -29,12 +29,12 @@ module.exports = {
     userLogin: async (req, res) => {
         try {
             const user = await User.findOne({ email: req.body.email })
-            if( user ) {
+            if(user) {
                 const matchPass = await bcrypt.compare(req.body.password, user.password)
-                if( matchPass ) {
+                if(matchPass) {
                     const userToken = jwt.sign({ _id: user._id, email: user.email }, secret, { expiresIn: '2h' })
                     console.log(`Successful login for user with email: ${user.email}`) //todo Checking Login
-                    res.status(201).cookie('userToken', userToken, {httpOnly: true, maxAge:2*60*60*1000}).json(user);
+                    res.status(201).cookie('userToken', userToken, {httpOnly: true, maxAge: 2 * 60 * 60 * 1000}).json(user);
                 } else {
                     res.status(400).json({ message: 'Invalid Email or Password.' })
                 }
@@ -50,5 +50,23 @@ module.exports = {
     userLogout: (req, res) => {
         res.clearCookie('userToken')
         res.status(200).json({ message: 'Succesfully logged out.' })
+    },
+    //! Function to get the current user details
+    getCurrentUser: async (req, res) => {
+        try {
+            const token = req.cookies.userToken;
+            if(!token) {
+                return res.status(401).json({ message: "Not authenticated" });
+            }
+            const decoded = jwt.verify(token, secret);
+            const user = await User.findById(decoded._id);
+            if(!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            res.status(200).json({ userName: user.userName, email: user.email }); // Adjust the property names to match your User schema
+        } catch(err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
 }
